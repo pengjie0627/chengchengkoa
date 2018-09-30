@@ -5,7 +5,8 @@ import axios from 'axios'
 // }
 // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
 const instance = axios.create({
-  baseURL: 'http://http://114.116.86.37:3000',
+  // baseURL: 'http://114.116.86.37:3000',
+  baseURL: 'http://localhost:3000',
   timeout: 6000,
   withCredentials: true
 });

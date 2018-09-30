@@ -37,9 +37,17 @@ export default {
     onLogin: function () {
       this.getUser().then((resp) => {
         if (resp.success) {
-          localStorage.setItem('employName', resp.data.userName)
-          localStorage.setItem('permission', resp.data.permission)
-          this.$router.push({name: 'home'})
+          try {
+            if (localStorage && window.localStorage) {
+              localStorage.setItem('employName', resp.data.userName)
+              localStorage.setItem('permission', resp.data.permission)
+              this.$router.push({name: 'home'})
+            } else {
+              this.$message.error('手机系统版本太低,升级后再试试')
+            }
+          } catch (error) {
+            this.$message.error('手机系统版本太低,升级后再试试')
+          }
         }
       }).catch((error) => {
         this.$message.error(error.message);

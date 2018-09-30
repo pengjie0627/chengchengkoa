@@ -82,7 +82,7 @@ var fn_file_upload = async (ctx,next) => {
     const reader = fs.createReadStream(ctx.request.files.file.path);
     let filePath = ''
     let fileStamp = ''
-    if (ctx.request.files.file.type.indexOf('jpeg') > 0) {
+    if (ctx.request.files.file.type.indexOf('jpeg') > 0 || ctx.request.files.file.type.indexOf('JPEG') > 0) {
         fileStamp = new Date().getTime() + '.jpg'
         filePath = path.join(__dirname, 'public/') + fileStamp;
     } else {
