@@ -16,6 +16,7 @@
     </div>
     <footer class="footer">
       <el-button type="primary" :disabled="!userName || !password " @click="onLogin">登录</el-button>
+      <div class="text-center">技术支持与管理联系QQ：2396097873</div>
     </footer>
   </div>
 </template>
@@ -84,5 +85,9 @@ export default {
   }
   .el-button{
     width: 100%;
+  }
+  .text-center{
+    text-align: center;
+    color: #777;
   }
 </style>
