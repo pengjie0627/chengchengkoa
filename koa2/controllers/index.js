@@ -6,6 +6,23 @@ var fn_login = async(ctx, next) => {
     // 获取账号信息
     let loginName = ctx.request.query.userName
     let loginPassword = ctx.request.query.password
+    // 检查数据库表是否存在
+    let employTable = await db.query('show tables like "employ"')
+    if (employTable.length === 0) {// 表不存在
+        console.log('员工表不存在,正在创建')
+        await db.createTable(require('../mysql/table').employ)
+        await db.add(`insert into employ(name,mobile,dateTime,password,remark,auth,checked) values('admin','13838543062','2018-09-30','admin','店长账号','1','1')`)
+        console.log('店长账号创建成功')
+    } else { // 表存在
+        console.log('员工表存在')
+    }
+    let customTable = await db.query('show tables like "custom"')
+    if (customTable.length === 0) {// 表不存在
+        console.log('顾客表不存在,正在创建')
+        await db.createTable(require('../mysql/table').custom)
+    } else { // 表存在
+        console.log('顾客表存在')
+    }
     // 获取数据库表admin信息
     let adminArr = await db.query(`SELECT * FROM employ WHERE name = '${loginName}' AND password = '${loginPassword}'`)// 引号一定需要
     if (adminArr.length > 0) {
@@ -41,15 +58,6 @@ var fn_login = async(ctx, next) => {
 };
 
 var fn_user_list = async (ctx, next) => {
-    console.log(ctx.cookies.get('username'))
-    let database = await db.query('show tables like "employ"')
-    if (database.length === 0) {// 表不存在
-        console.log('顾客表不存在')
-        await db.createTable(require('../mysql/table').user)
-    } else { // 表存在
-        console.log('顾客表存在')
-    }
-    console.log(database)
     let users = await db.query('select * from employ');
     console.log(users)
     const response = require('../dao/baseResponse')
