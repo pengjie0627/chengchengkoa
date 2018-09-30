@@ -47,10 +47,15 @@ module.exports = {
 
   build: {
     // Template for index.html
-    index: path.resolve(__dirname, '../dist/index.html'),
+    // index: path.resolve(__dirname, '../dist/index.html'),
 
     // Paths
-    assetsRoot: path.resolve(__dirname, '../dist'),
+    // assetsRoot: path.resolve(__dirname, '../dist'),
+    // 手动修改的配置
+    index: path.resolve('C:/wdj/apache-tomcat-7.0.91/webapps/ROOT/index.html'),
+
+    // 手动修改的配置
+    assetsRoot: path.resolve('C:/wdj/apache-tomcat-7.0.91/webapps/ROOT'),
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
 

@@ -28,3 +28,8 @@ npm test
 ```
 
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+ // 手动修改的配置
+index: path.resolve('C:/wdj/apache-tomcat-7.0.91/webapps/ROOT/index.html'),
+
+// 手动修改的配置
+assetsRoot: path.resolve('C:/wdj/apache-tomcat-7.0.91/webapps/ROOT'),
