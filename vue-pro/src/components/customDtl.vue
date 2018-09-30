@@ -80,11 +80,7 @@
         })
       },
       onBack: function () {
-        if (this.$route.query.type === 'customList') {
-          this.$router.back()
-        } else {
-          this.$router.push('home')
-        }
+        this.$router.back()
       },
       onImgClick: function (imgUrl) {
         this.dialogVisible = true
