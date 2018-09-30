@@ -39,7 +39,7 @@ export default {
     font-size: 14px;
     background: #F0F2F5;
   }
-  @media all and (orientation: landscape){
+  @media all and (orientation: portrait){
     .vertical{
       display: none;
     }
@@ -47,11 +47,12 @@ export default {
       display: block;
     }
   }
-  @media all and (orientation: portrait){
+  @media all and (orientation: landscape){
     .vertical{
       display: block;
       color: red;
       font-size: 20px;
+      text-align: center;
     }
     .horizon{
       display: none;
