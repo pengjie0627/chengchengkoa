@@ -17,11 +17,8 @@
         this.checkPermission = localStorage.getItem('permission')
         this.employName = localStorage.getItem('employName')
       } catch (e) {
-        let cookies = document.cookie
-        if (cookies) {
-          this.checkPermission = cookies.split('#')[0]
-          this.employName = cookies.split('#')[1]
-        }
+        this.checkPermission = Constant.user.userName
+        this.employName = Constant.user.password
       }
     },
     data() {

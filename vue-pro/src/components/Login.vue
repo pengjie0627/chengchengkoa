@@ -23,6 +23,7 @@
 
 <script>
   import HttpClient from 'http/httpClient.js'
+  import Constant from 'mgr/Constant.js'
 export default {
   name: 'HelloWorld',
   data () {
@@ -44,11 +45,15 @@ export default {
               localStorage.setItem('permission', resp.data.permission)
             } else {
               // this.$message.error('手机系统版本太低,升级后再试试')
-              document.cookie = `${resp.data.userName}#${resp.data.permission}`
+              // document.cookie = `${resp.data.userName}#${resp.data.permission}`
+              Constant.user.userName = resp.data.userName
+              Constant.user.password = resp.data.permission
             }
             this.$router.push({name: 'home'})
           } catch (error) {
-            document.cookie = `${resp.data.userName}#${resp.data.permission}`
+            // document.cookie = `${resp.data.userName}#${resp.data.permission}`
+            Constant.user.userName = resp.data.userName
+            Constant.user.password = resp.data.permission
             this.$router.push({name: 'home'})
             // this.$message.error('手机系统版本太低,升级后再试试')
           }
