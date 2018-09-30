@@ -13,12 +13,14 @@
         <el-table-column prop="mobile" label="手机号" width="120"></el-table-column>
         <el-table-column prop="auth" label="登录权限" align="center">
           <template slot-scope="scope">
-            {{scope.row.auth === 0 ? '无' : '有'}}
+            <span style="color: green" v-if="scope.row.auth === 1">有</span>
+            <span style="color: red;" v-if="scope.row.auth === 0">无</span>
           </template>
         </el-table-column>
         <el-table-column prop="checked" label="查看权限"  align="center">
           <template slot-scope="scope">
-            {{scope.row.checked === 0 ? '无' : '有'}}
+            <span style="color: green" v-if="scope.row.checked === 1">有</span>
+            <span style="color: red;" v-if="scope.row.checked === 0">无</span>
           </template>
         </el-table-column>
         <!--<el-table-column prop="name" label="操作" align="center">-->

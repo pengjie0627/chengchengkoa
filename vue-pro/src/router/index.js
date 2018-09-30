@@ -7,6 +7,7 @@ import Home from '@/components/Home.vue'
 import AddCustom from '@/components/AddCustom.vue'
 import CustomDtl from '@/components/customDtl.vue'
 import EmployDtl from '@/components/EmployDtl.vue'
+import AddEmploy from '@/components/AddEmploy.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -50,6 +51,11 @@ export default new Router({
       path: '/employDtl',
       name: 'employDtl',
       component: EmployDtl
+    },
+    {
+      path: '/addEmploy',
+      name: 'addEmploy',
+      component: AddEmploy
     }
   ]
 })

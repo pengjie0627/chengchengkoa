@@ -66,7 +66,7 @@ export default {
     height: 300px;
     width: 90%;
     margin: 0 auto;
-    margin-top: 35%;
+    margin-top: 100px;
   }
   .title{
     text-align: center;

@@ -76,6 +76,59 @@ var fn_employ_auth = async (ctx, next) => {
     response.total = employs.length
     ctx.response.body = response
 }
+var fn_employ_save = async (ctx, next) => {
+    await db.add(`insert into employ(name,mobile,dateTime,password,remark,auth,checked) values 
+    ('${ctx.request.body.name}',
+    '${ctx.request.body.mobile}',
+    '${ctx.request.body.dateTime}', 
+    '${ctx.request.body.password}', 
+    '${ctx.request.body.remark}', 
+    '${ctx.request.body.auth}', 
+    '${ctx.request.body.checked}')`)
+    let addEmploy = await db.query(`select * from employ where mobile = '${ctx.request.body.mobile}'`)
+    const response = require('../dao/baseResponse')
+    if (addEmploy) {
+        response.data = addEmploy[0]
+        response.success = true
+        response.total = 0
+        ctx.response.body = response
+    }
+}
+var fn_employ_dtl = async (ctx, next) => {
+    let mobile = ctx.request.query.mobile
+    let id = ctx.request.query.id
+    let customDtl = await db.query(`select * from employ where mobile = '${mobile}' and id = '${id}'`)
+    const response = require('../dao/baseResponse')
+    response.data = customDtl
+    response.success = true
+    response.total = 0
+    ctx.response.body = response
+}
+var fn_employ_edit = async (ctx, next) => {
+    let name = ctx.request.body.name
+    let mobile = ctx.request.body.mobile
+    let password = ctx.request.body.password
+    let remark = ctx.request.body.remark
+    let dateTime = ctx.request.body.dateTime
+    let auth = ctx.request.body.auth
+    let checked = ctx.request.body.checked
+    let id = ctx.request.body.id
+    await db.update(`update employ set 
+    name = '${name}',
+    mobile = '${mobile}',
+    password = '${password}',
+    remark = '${remark}',
+    dateTime = '${dateTime}',
+    auth = '${auth}',
+    checked = '${checked}'
+    where mobile = '${mobile}' and id = '${id}'`)
+    let employ = await db.query(`select * from employ where id = '${id}'`)
+    const response = require('../dao/baseResponse')
+    response.data = employ[0]
+    response.success = true
+    response.total = 0
+    ctx.response.body = response
+}
 var fn_file_upload = async (ctx,next) => {
     console.log(ctx.session.userinfo)
     // 创建可读流
@@ -117,14 +170,6 @@ var fn_custom_edit = async (ctx, next) => {
     let name = ctx.request.body.name
     let mobile = ctx.request.body.mobile
     let hairImg = ctx.request.body.image
-    // let imgStr = ''
-    // if (hairImg && hairImg.length > 0) {
-    //     hairImg.forEach(item => {
-    //         imgStr += item + ','
-    //     })
-    //     imgStr = imgStr.substring(0, imgStr.length-1)
-    // }
-    // console.log(imgStr)
     let hairTime = ctx.request.body.time
     let remark = ctx.request.body.remark
     let id = ctx.request.body.id
@@ -211,12 +256,15 @@ module.exports = {
     'GET /login': fn_login,
     'GET /userList': fn_user_list,
     'POST /employAuth': fn_employ_auth,
+    'POST /employSave': fn_employ_save,
     'POST /fileUpload': fn_file_upload,
     'POST /customSave': fn_custom_save,
     'POST /customEdit': fn_custom_edit,
+    'POST /employEdit': fn_employ_edit,
     'POST /customDelete': fn_custom_delete,
     'GET /customDtls': fn_custom_dtls,
     'GET /customDtl': fn_custom_dtl,
+    'GET /employDtl': fn_employ_dtl,
     'GET /customList': fn_custom_List,
     'GET /customSearch': fn_custom_search
 };

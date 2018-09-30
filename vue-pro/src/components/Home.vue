@@ -2,9 +2,10 @@
     <div>
       <header class="title">城城美业</header>
       <div class="home">
-        <div class="item"><el-button type="success" @click="onAddCustom">新增客户信息</el-button></div>
+        <div class="item"><el-button v-if="employName === 'admin'" type="success" @click="onAddCustom">新增客户信息</el-button></div>
+        <div class="item"><el-button type="success" @click="onAddEmploy">新增员工信息</el-button></div>
         <div class="item"> <el-button v-if="employName === 'admin'" type="success" @click="onToAuth">管理员工权限</el-button></div>
-        <div class="item"><el-button v-if="checkPermission === '1'" type="success" @click="onToCheck">客户查询信息</el-button></div>
+        <div class="item"><el-button v-if="checkPermission === '1'" type="success" @click="onToCheck">客户信息查询</el-button></div>
       </div>
     </div>
 </template>
@@ -30,6 +31,9 @@
       },
       onAddCustom: function () {
         this.$router.push({name: 'addCustom', query: {type: 'add'}})
+      },
+      onAddEmploy: function () {
+        this.$router.push({name: 'addEmploy', query: {type: 'add'}})
       }
     }
   }
