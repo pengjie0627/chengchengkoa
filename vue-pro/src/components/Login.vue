@@ -39,24 +39,7 @@ export default {
     onLogin: function () {
       this.getUser().then((resp) => {
         if (resp.success) {
-          try {
-            if (localStorage && window.localStorage) {
-              localStorage.setItem('employName', resp.data.userName)
-              localStorage.setItem('permission', resp.data.permission)
-            } else {
-              // this.$message.error('手机系统版本太低,升级后再试试')
-              // document.cookie = `${resp.data.userName}#${resp.data.permission}`
-              Constant.user.userName = resp.data.userName
-              Constant.user.password = resp.data.permission
-            }
-            this.$router.push({name: 'home'})
-          } catch (error) {
-            // document.cookie = `${resp.data.userName}#${resp.data.permission}`
-            Constant.user.userName = resp.data.userName
-            Constant.user.password = resp.data.permission
-            this.$router.push({name: 'home'})
-            // this.$message.error('手机系统版本太低,升级后再试试')
-          }
+          this.$router.push({name: 'home', query: {name: resp.data.userName, permission: resp.data.permission}})
         }
       }).catch((error) => {
         this.$message.error(error.message);

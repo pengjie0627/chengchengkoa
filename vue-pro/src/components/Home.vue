@@ -13,13 +13,8 @@
 <script>
   export default {
     mounted: function() {
-      try {
-        this.checkPermission = localStorage.getItem('permission')
-        this.employName = localStorage.getItem('employName')
-      } catch (e) {
-        this.checkPermission = Constant.user.userName
-        this.employName = Constant.user.password
-      }
+      this.checkPermission = this.$route.query.permission
+      this.employName = this.$route.query.name
     },
     data() {
       return {
