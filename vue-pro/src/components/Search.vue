@@ -49,7 +49,7 @@
         this.$router.push({name: 'customDtl', query: {mobile: row.mobile, type: 'customList', id: row.id}})
       },
       onBack: function () {
-        this.$router.push('home')
+        this.$router.back()
       },
       onCustomSearch: function() {
         HttpClient.get(`/customSearch?mobile=${this.userMobile}`).then((resp) => {

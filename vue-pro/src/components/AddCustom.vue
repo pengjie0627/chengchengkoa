@@ -116,7 +116,7 @@
         this.remark = ''
       },
       onBack: function () {
-        this.$router.push('home')
+        this.$router.back()
       },
       getCustomDtl: function () {
         let mobile = this.$route.query.mobile
