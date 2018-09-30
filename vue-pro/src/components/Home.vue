@@ -13,8 +13,16 @@
 <script>
   export default {
     mounted: function() {
-      this.checkPermission = localStorage.getItem('permission')
-      this.employName = localStorage.getItem('employName')
+      try {
+        this.checkPermission = localStorage.getItem('permission')
+        this.employName = localStorage.getItem('employName')
+      } catch (e) {
+        let cookies = document.cookie
+        if (cookies) {
+          this.checkPermission = cookies.split('#')[0]
+          this.employName = cookies.split('#')[1]
+        }
+      }
     },
     data() {
       return {
@@ -41,7 +49,7 @@
 
 <style scoped>
   .home{
-    margin-top: 30%;
+    margin-top: 70px;
   }
   .title{
     text-align: center;
