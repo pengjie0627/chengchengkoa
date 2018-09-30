@@ -48,7 +48,9 @@ export default {
             }
             this.$router.push({name: 'home'})
           } catch (error) {
-            this.$message.error('手机系统版本太低,升级后再试试')
+            document.cookie = `${resp.data.userName}#${resp.data.permission}`
+            this.$router.push({name: 'home'})
+            // this.$message.error('手机系统版本太低,升级后再试试')
           }
         }
       }).catch((error) => {

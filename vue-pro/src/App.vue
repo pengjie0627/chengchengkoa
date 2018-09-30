@@ -1,6 +1,9 @@
 <template>
   <div id="app">
-    <router-view/>
+    <div class="horizon">
+      <router-view/>
+    </div>
+    <div class="vertical">使用竖屏体验效果更好</div>
   </div>
 </template>
 
@@ -8,26 +11,8 @@
 export default {
   name: 'App',
   mounted: function() {
-    this.orition()
   },
   methods: {
-    orition: function () {
-      try {
-        if (window.orientation === 0 || window.orientation === 180) {
-          // $("body").attr("class", "portrait");
-          document.getElementById('bodyRef').setAttribute('class', 'portrait')
-          orientation = 'portrait'
-          return false
-        }
-        else if (window.orientation === 90 || window.orientation === -90) {
-          // $("body").attr("class", "landscape")
-          document.getElementById('bodyRef').setAttribute('class', 'landscape')
-          orientation = 'landscape'
-          return false
-        }
-      } catch(error) {
-      }
-    }
   }
 }
 </script>
@@ -55,9 +40,21 @@ export default {
     background: #F0F2F5;
   }
   @media all and (orientation: landscape){
-
+    .vertical{
+      display: none;
+    }
+    .horizon{
+      display: block;
+    }
   }
   @media all and (orientation: portrait){
-
+    .vertical{
+      display: block;
+      color: red;
+      font-size: 20px;
+    }
+    .horizon{
+      display: none;
+    }
   }
 </style>
