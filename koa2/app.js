@@ -1,12 +1,12 @@
 const Koa = require('koa');
 const app = new Koa();
-const router = require('koa-router')();
 const bodyParser = require('koa-bodyparser');
 const controller = require('./controller');
 const koaBody = require('koa-body');
 const KoaStatic = require('koa-static')
 const path = require('path')
 const KoaSession = require('koa-session');
+
 app.keys = ["hello cc"]; // 这个和下面的signed: true有关，就随便起一个名字吧
 const CONFIG = {
     key: 'koa:sess', /** (string) cookie key (default is koa:sess) */
@@ -41,5 +41,25 @@ app.use(koaBody({
 }));
 app.use(bodyParser());
 app.use(controller());
-app.listen(3000);
+let server = app.listen(3000)
 console.log('app start ar port 3000...');
+
+
+// socket-io
+let onLineNum = 0
+let io = require('socket.io')(server)
+// connection固定写法
+io.on('connection', (socket) => {
+    console.log('新增一个连接')
+    onLineNum++
+    io.emit('join', {num: onLineNum})
+    // disconnect固定写法
+    socket.on('disconnect', () => {
+        console.log('失去了一个连接')
+        onLineNum--
+        io.emit('leave', {num: onLineNum})
+    })
+    socket.on('news', (data) => {
+        io.emit('news', {msg: `${data.message}`})
+    })
+})

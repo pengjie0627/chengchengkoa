@@ -6,6 +6,7 @@
         <div class="item"><el-button v-if="employName === 'admin'" type="success" @click="onAddEmploy">新增员工信息</el-button></div>
         <div class="item"> <el-button v-if="employName === 'admin'" type="success" @click="onToAuth">管理员工权限</el-button></div>
         <div class="item"><el-button v-if="checkPermission" type="success" @click="onToCheck">客户信息查询</el-button></div>
+        <div class="item"><el-button type="success" @click="onToGroupChat">去和员工群聊</el-button></div>
       </div>
     </div>
 </template>
@@ -34,6 +35,9 @@
       },
       onAddEmploy: function () {
         this.$router.push({name: 'addEmploy', query: {type: 'add'}})
+      },
+      onToGroupChat: function () {
+        this.$router.push('/groupChat')
       }
     }
   }

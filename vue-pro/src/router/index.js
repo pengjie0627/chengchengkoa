@@ -8,6 +8,7 @@ import AddCustom from '@/components/AddCustom.vue'
 import CustomDtl from '@/components/customDtl.vue'
 import EmployDtl from '@/components/EmployDtl.vue'
 import AddEmploy from '@/components/AddEmploy.vue'
+import GroupChat from '@/components/GroupChat.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -56,6 +57,11 @@ export default new Router({
       path: '/addEmploy',
       name: 'addEmploy',
       component: AddEmploy
+    },
+    {
+      path: '/groupChat',
+      name: 'groupChat',
+      component: GroupChat
     }
   ]
 })

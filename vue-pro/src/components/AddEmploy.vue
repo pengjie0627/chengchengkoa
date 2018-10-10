@@ -26,10 +26,10 @@
         <el-input v-model="remark" maxLength=254 placeholder="请输入备注信息"></el-input>
       </el-form-item>
       <el-form-item label="登录权限" prop="age">
-        <el-switch v-model="auth"></el-switch>&nbsp;&nbsp;该员工拥有登录权限
+        <el-switch v-model="auth" :disabled="name === 'admin'"></el-switch>&nbsp;&nbsp;该员工拥有登录权限
       </el-form-item>
       <el-form-item label="查看权限" prop="age">
-        <el-switch v-model="checked"></el-switch>&nbsp;&nbsp;该员工拥有查看客户信息权限
+        <el-switch v-model="checked" :disabled="name === 'admin'"></el-switch>&nbsp;&nbsp;该员工拥有查看客户信息权限
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="submitForm">提交</el-button>
@@ -103,6 +103,8 @@
               this.$message.success('员工资料保存成功')
               this.$router.push({name:'employDtl', query: {employ: JSON.stringify(resp.data), type: 'employAdd'}})
             }
+          }).catch((error) => {
+            this.$message.error(error.message)
           })
         } else {
           let id = this.$route.query.id
@@ -118,7 +120,7 @@
               id: id
             })).then((resp) => {
             if (resp.success) {
-              this.$message.success('客户资料保存成功')
+              this.$message.success('员工资料编辑成功')
               this.$router.push({name:'employDtl', query: {employ: JSON.stringify(resp.data), type: 'customAdd'}})
             }
           })
@@ -130,8 +132,8 @@
         this.dateTime = ''
         this.password = ''
         this.remark = ''
-        this.auth = false
-        this.checked = false
+        // this.auth = false
+        // this.checked = false
       },
       onBack: function () {
         this.$router.back()

@@ -85,7 +85,7 @@ var fn_employ_auth = async (ctx, next) => {
     ctx.response.body = response
 }
 var fn_employ_save = async (ctx, next) => {
-    await db.add(`insert into employ(name,mobile,dateTime,password,remark,auth,checked) values 
+    let result = await db.add(`insert into employ(name,mobile,dateTime,password,remark,auth,checked) values 
     ('${ctx.request.body.name}',
     '${ctx.request.body.mobile}',
     '${ctx.request.body.dateTime}', 
@@ -93,13 +93,22 @@ var fn_employ_save = async (ctx, next) => {
     '${ctx.request.body.remark}', 
     '${ctx.request.body.auth}', 
     '${ctx.request.body.checked}')`)
-    let addEmploy = await db.query(`select * from employ where mobile = '${ctx.request.body.mobile}'`)
-    const response = require('../dao/baseResponse')
-    if (addEmploy) {
-        response.data = addEmploy[0]
-        response.success = true
+    if (result.msg) {
+        const response = require('../dao/baseResponse')
+        response.data = result.msg
+        response.success = false
+        response.message = '重复的手机号'
         response.total = 0
         ctx.response.body = response
+    } else {
+        let addEmploy = await db.query(`select * from employ where mobile = '${ctx.request.body.mobile}'`)
+        const response = require('../dao/baseResponse')
+        if (addEmploy) {
+            response.data = addEmploy[0]
+            response.success = true
+            response.total = 0
+            ctx.response.body = response
+        }
     }
 }
 var fn_employ_dtl = async (ctx, next) => {
@@ -265,14 +274,16 @@ module.exports = {
     'GET /userList': fn_user_list,
     'POST /employAuth': fn_employ_auth,
     'POST /employSave': fn_employ_save,
+    'POST /employEdit': fn_employ_edit,
+    'GET /employDtl': fn_employ_dtl,
+
     'POST /fileUpload': fn_file_upload,
+
     'POST /customSave': fn_custom_save,
     'POST /customEdit': fn_custom_edit,
-    'POST /employEdit': fn_employ_edit,
     'POST /customDelete': fn_custom_delete,
     'GET /customDtls': fn_custom_dtls,
     'GET /customDtl': fn_custom_dtl,
-    'GET /employDtl': fn_employ_dtl,
     'GET /customList': fn_custom_List,
     'GET /customSearch': fn_custom_search
 };

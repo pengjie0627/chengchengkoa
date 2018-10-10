@@ -47,7 +47,11 @@ var operator = {
             connect.query(sql, (err, result) => {
                 if (err) {
                     console.log('数据库新增错误:' + err.message);
-                    reject(err)
+                    // reject(err)
+                    // throw err
+                    resolve({
+                        msg: err
+                    })
                 }
                 console.log('-------------新增成功----------');
                 resolve(result)

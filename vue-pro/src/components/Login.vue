@@ -34,7 +34,7 @@ export default {
   },
   methods: {
     getUser: function () {
-      return HttpClient.get(`/login?userName=${this.userName}&password=${this.password}`)
+      return HttpClient.get(`/login?userName=${this.userName.trim()}&password=${this.password.trim()}`)
     },
     onLogin: function () {
       this.getUser().then((resp) => {
