@@ -9,9 +9,10 @@ import CustomDtl from '@/components/customDtl.vue'
 import EmployDtl from '@/components/EmployDtl.vue'
 import AddEmploy from '@/components/AddEmploy.vue'
 import GroupChat from '@/components/GroupChat.vue'
+import store from '../store/index'
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   routes: [
     {
       path: '/',
@@ -65,3 +66,11 @@ export default new Router({
     }
   ]
 })
+router.beforeEach((to, from, next) => {
+  if (!store.state.user.user && to.name !== 'login') {
+    next('login')
+  } else {
+    next()
+  }
+})
+export default router

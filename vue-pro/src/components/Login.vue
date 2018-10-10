@@ -39,6 +39,7 @@ export default {
     onLogin: function () {
       this.getUser().then((resp) => {
         if (resp.success) {
+          this.$store.dispatch('actionUser', {name: resp.data.userName, permission: resp.data.permission})
           this.$router.push({name: 'home', query: {name: resp.data.userName, permission: resp.data.permission}})
         }
       }).catch((error) => {
