@@ -39,7 +39,7 @@ export default {
     font-size: 14px;
     background: #F0F2F5;
   }
-  @media all and (orientation: portrait){
+  @media all and (orientation: portrait){ /*竖屏*/
     .vertical{
       display: none;
     }
@@ -47,7 +47,7 @@ export default {
       display: block;
     }
   }
-  @media all and (orientation: landscape){
+  @media all and (orientation: landscape){ /*横屏*/
     .vertical{
       display: block;
       color: red;
