@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="img-wrap">
-      <input  type="file" class="img-input" @change="onImgChange($event)">
+      <input  type="file" accept="image/*" class="img-input" @change="onImgChange($event)">
       <span  class="line1"></span>
       <span  class="line2"></span>
     </div>
